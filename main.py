@@ -94,7 +94,10 @@ if __name__ == "__main__":
         {
             "messages": [
                 HumanMessage(
-                    content="What is the temperature in Tokyo? List it and then triple it"
+                    #content="What is the temperature in Tokyo? List it and then triple it"
+                    content="What is Pinecone and machine Learning?"
+                    #content="Quando é 3 vezes 10?"
+                    #content="Qual a temperatura em Tokyo? O que é Pinecone? O que é Machine Learning? Quando é 3 vezes 10?"
                 )
             ]
         }
