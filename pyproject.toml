@@ -12,6 +12,7 @@ black = "*"
 isort = "*"
 langchain = "*"
 langchain-openai = "*"
+langchain-groq = "*"
 langgraph = "*"
 grandalf = "*"
 

@@ -3,7 +3,7 @@ from typing import List, Sequence
 from dotenv import load_dotenv
 load_dotenv()
 
-from langchain_core.messages import BaseMessage, HumanMessage
+from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langgraph.graph import END, MessageGraph
 
 from chains import generate_chain, reflect_chain
@@ -38,18 +38,23 @@ builder.add_conditional_edges(GENERATE, should_continue,  {END:END, REFLECT:REFL
 builder.add_edge(REFLECT, GENERATE)
 
 graph = builder.compile()
-print(graph.get_graph().draw_mermaid())
-graph.get_graph().print_ascii()
+#print(graph.get_graph().draw_mermaid())
+#graph.get_graph().print_ascii()
 
 if __name__ == "__main__":
     print("Hello LangGraph")
-    inputs = HumanMessage(content="""Make this tweet better:"
-                                    @LangChainAI
-            — newly Tool Calling feature is seriously underrated.
-
-            After a long wait, it's  here- making the implementation of agents across different models with function calling - super easy.
-
-            Made a video covering their newest blog post
-
+    inputs = HumanMessage(content="""
+        Torne o texto abaixo mais humanizado:
+        A Inteligência Artificial (IA) é um dos campos mais dinâmicos e transformadores da ciência da computação.
+        Ela pode ser entendida como a capacidade de sistemas computacionais realizarem tarefas que normalmente exigiriam
+        inteligência humana, como raciocínio lógico, reconhecimento de padrões, aprendizado, tomada de decisão e até mesmo
+        criatividade.
                                   """)
     response = graph.invoke(inputs)
+
+    # Imprime a última resposta gerada pela IA
+    last_ai = next((m for m in reversed(response) if isinstance(m, AIMessage)), None)
+    if last_ai:
+        print("Última resposta da IA:", last_ai.content)
+    last_ai_message = next((m for m in reversed(response) if getattr(m, "type", None) == "ai"), None)
+    
