@@ -1,8 +1,10 @@
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
+#from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
-llm = ChatOpenAI(temperature=0)
+#llm = ChatOpenAI(temperature=0)
+llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
 
 
 class GradeDocuments(BaseModel):
